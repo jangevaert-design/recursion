@@ -1,53 +1,40 @@
 package edu.cnm.deepdive;
 
-import static java.math.BigInteger.valueOf;
-
 import java.math.BigInteger;
 
+/**
+ * Demonstrates recursive and itertaive approaches to computing the factorial function directly.
+ */
 public class Factorials {
 
   /**
-   * Computes the factorial function value (n!) for the provided parameter value.
-   * Changed return type from long to Big Integer to avoid incorrect outcomes
-   * on n >21
-   * @param n
-   * @return the computed value of n!
-   * @throws IllegalArgumentException when n < 0
+   * Recursively computes the factorial of the parameter {@code n}, processing and returning the
+   * result as a {@link BigInteger}, for extended size values.
+   *
+   * @param n the {@code long} value for which the factorial function is to be computed.
+   * @return n!
+   * @throws IllegalArgumentException when {@code n < 0}.
    */
   public static BigInteger computeRecursive(int n) throws IllegalArgumentException {
-    int result;
+    BigInteger result = BigInteger.ONE;
     if (n < 0) {
       throw new IllegalArgumentException();
     }
-    if (n == 0) {
-      result = 1;
-
-    } else {
-      result = valueOf((n - 1).multiply(computeRecursive()) * n);
-    }
-    return valueOf(result);
-  }
-
-  private static BigInteger computeRecursive() {
-    return null;
-  }
-
-
-  public static long computeIterative(int n) throws IllegalArgumentException {
-    int result;
-    if (n < 0) {
-      throw new IllegalArgumentException();
-    }
-    if (n == 0) {
-      result = 1;
-
-    } else {
-      result = (int) (n * factorial(n - 1));
+    if (n > 0) {
+      result = BigInteger.valueOf(n).multiply(computeRecursive(n - 1));
     }
     return result;
   }
 
-  private static int factorial(int i) {
-    return 0;
+  public static BigInteger computeIterative(int n) {
+    BigInteger result = BigInteger.ONE;
+    if (n < 0) {
+      throw new IllegalArgumentException();
+    }
+    for (int i = 1; i <= n; i++) {
+      result = result.multiply(BigInteger.valueOf(i));
+    }
+    return result;
   }
+
 }

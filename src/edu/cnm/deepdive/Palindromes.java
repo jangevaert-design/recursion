@@ -16,14 +16,9 @@ public class Palindromes {
     );
   }
 
-  public static boolean testDenormalized(String covert) {
-    String lettersOnly = (String.removeAll("[\\W_]+")).toLowerCase();
-    testRecursive(lettersOnly);
-    return covert.length() <= 1
-        || (
-        covert.charAt(0) == covert.charAt(covert.length() - 1)
-            && testRecursive(covert.substring(1, covert.length() - 1))
-    );
+  public static boolean testDenormalized(String input) {
+    String normalized = input.replaceAll("[\\W_]+", "").toLowerCase();
+    return testRecursive(normalized);
   }
 
 }
